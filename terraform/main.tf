@@ -89,3 +89,23 @@ resource "null_resource" "link_monitoring" {
     }
   }
 }
+
+data "template_file" "dash-template" {
+  template = "${file("${path.module}/dashboard.tpl")}"
+  vars = {
+    api_name = azurerm_application_insights.appi.name
+    rg_name  = data.azurerm_resource_group.wsdevops.name
+    sub_id   = var.subscription_id
+    query    = "requests | where resultCode != 200 | summarize count()"
+  }
+}
+
+resource "azurerm_dashboard" "my-board" {
+  name                = "${local.my_prefix}-dasboard"
+  resource_group_name = data.azurerm_resource_group.wsdevops.name
+  location            = data.azurerm_resource_group.wsdevops.location
+  tags = {
+    source = "terraform"
+  }
+  dashboard_properties = data.template_file.dash-template.rendered
+}
