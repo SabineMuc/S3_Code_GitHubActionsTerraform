@@ -81,8 +81,8 @@ az webapp config appsettings set --name $web_app_name --resource-group $rg_name 
       con_tenant_id     = var.tenant_id
       // Parameters needed for linking
       inst_key          = azurerm_application_insights.appi.instrumentation_key
-      conn_str          = azurerm_application_insights.appi.connection_string
-      rg_name           = var.rg_name
+      conn_str          = azurerm_application_insights.appi.connection_string 
+      rg_name           = data.azurerm_resource_group.wsdevops.name
       web_app_name      = var.web_app_name
     }
   }
