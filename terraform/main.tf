@@ -53,7 +53,7 @@ resource "azurerm_app_service" "website" {
 }
 
 resource "azurerm_log_analytics_workspace" "log" {
-  name                = "${local.my_prefix}-lg-analytics"
+  name                = "sfranz-lg-analytics"
   location            = data.azurerm_resource_group.wsdevops.location
   resource_group_name = data.azurerm_resource_group.wsdevops.name
   sku                 = "PerGB2018"
@@ -61,7 +61,7 @@ resource "azurerm_log_analytics_workspace" "log" {
 }
 
 resource "azurerm_application_insights" "appi" {
-  name                = "${local.my_prefix}-api"
+  name                = "sfranz-api"
   location            = data.azurerm_resource_group.wsdevops.location
   resource_group_name = data.azurerm_resource_group.wsdevops.name
   workspace_id        = azurerm_log_analytics_workspace.log.id
