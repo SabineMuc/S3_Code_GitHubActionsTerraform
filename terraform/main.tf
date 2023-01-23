@@ -18,6 +18,10 @@ provider "azurerm" {
   features {}
 }
 
+#Get resource group
+data "azurerm_resource_group" "wsdevops" {
+  name = var.rg_name
+}
 
 resource "azurerm_app_service_plan" "sp1" {
   name                = var.app_service_plan_name
