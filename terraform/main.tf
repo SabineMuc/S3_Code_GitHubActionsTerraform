@@ -101,7 +101,7 @@ data "template_file" "dash-template" {
 }
 
 resource "azurerm_dashboard" "my-board" {
-  name                = "${local.my_prefix}-dasboard"
+  name                = "sfranz-dasboard"
   resource_group_name = data.azurerm_resource_group.wsdevops.name
   location            = data.azurerm_resource_group.wsdevops.location
   tags = {
